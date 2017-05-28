@@ -1,0 +1,5 @@
+android-headers (5.1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Rohan Garg <rohan@kde.org>  Sun, 07 May 2017 18:38:03 +0200

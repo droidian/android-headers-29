@@ -1,0 +1,22 @@
+Source: android-headers
+Priority: optional
+Maintainer: Rohan Garg <rohan@kde.org>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.8
+Section: libs
+Homepage: https://github.com/Halium/android-headers
+
+Package: android-headers
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Android Platform Headers from AOSP releases
+ Android NDK provided by Google contains subset of AOSP platform
+ headers which are deemed "external interface" by Google. However,
+ writing advanced software for Android necessitates access to complete
+ platform. Many aspects of it change, sometimes drastically, between
+ releases, so compiling user source code against platform headers for
+ different releases is required (e.g. for libhybris).
+ .
+ This package provides the platform development headers for core components
+ of AOSP (Android Open Source Project), for the 4.4.2 release
+
