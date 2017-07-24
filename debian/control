@@ -18,4 +18,4 @@ Description: Android Platform Headers from AOSP releases
  different releases is required (e.g. for libhybris).
  .
  This package provides the platform development headers for core components
- of LineageOS, for the 5.1 release.
+ of LineageOS, for the 7.1 release.
