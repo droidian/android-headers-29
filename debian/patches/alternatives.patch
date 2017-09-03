@@ -1,6 +1,6 @@
 --- android-headers-7.1.orig/Makefile
 +++ android-headers-7.1/Makefile
-@@ -5,9 +5,10 @@ all:
+@@ -5,9 +5,11 @@ all:
  	@echo "Use '$(MAKE) install' to install"
  
  install:
@@ -8,11 +8,12 @@
  	mkdir -p $(DESTDIR)/$(INCLUDEDIR)
  	mkdir -p $(DESTDIR)/$(PKGCONFIGDIR)
 -	cp android-config.h android-version.h $(DESTDIR)/$(INCLUDEDIR)
-+	cp android-config.h android-config-caf.h android-version.h $(DESTDIR)/$(INCLUDEDIR)
++	cp android-config.h $(DESTDIR)/$(INCLUDEDIR)/android-config-generic.h
++	cp android-config-caf.h android-version.h $(DESTDIR)/$(INCLUDEDIR)
  	cp android-headers.pc $(DESTDIR)/$(PKGCONFIGDIR)
  	sed -i -e s:prefix=/usr:prefix=$(PREFIX):g $(DESTDIR)/$(PKGCONFIGDIR)/android-headers.pc
  	cp -r hardware $(DESTDIR)/$(INCLUDEDIR)
-@@ -20,3 +21,6 @@ install:
+@@ -20,3 +22,6 @@ install:
  	cp -r libnfc-nxp $(DESTDIR)/$(INCLUDEDIR)
  	cp -r private $(DESTDIR)/$(INCLUDEDIR)
  	cp -r log $(DESTDIR)/$(INCLUDEDIR)
