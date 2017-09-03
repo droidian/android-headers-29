@@ -1,0 +1,9 @@
+#/bin/bash
+
+update-alternatives --remove \
+        android-config_h \
+        /usr/include/android/android-config-generic.h \
+
+update-alternatives --remove \
+        android-config_h \
+        /usr/include/android/android-config-caf.h \

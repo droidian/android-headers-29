@@ -1,0 +1,13 @@
+#!/bin/bash
+
+update-alternatives --install \
+        /usr/include/android/android-config.h \
+        android-config_h \
+        /usr/include/android/android-config-generic.h \
+        500
+
+update-alternatives --install \
+        /usr/include/android/android-config.h \
+        android-config_h \
+        /usr/include/android/android-config-caf.h \
+        400

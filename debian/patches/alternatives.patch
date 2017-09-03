@@ -1,0 +1,30 @@
+--- android-headers-7.1.orig/Makefile
++++ android-headers-7.1/Makefile
+@@ -5,9 +5,10 @@ all:
+ 	@echo "Use '$(MAKE) install' to install"
+ 
+ install:
++	bash ./genconf.sh
+ 	mkdir -p $(DESTDIR)/$(INCLUDEDIR)
+ 	mkdir -p $(DESTDIR)/$(PKGCONFIGDIR)
+-	cp android-config.h android-version.h $(DESTDIR)/$(INCLUDEDIR)
++	cp android-config.h android-config-caf.h android-version.h $(DESTDIR)/$(INCLUDEDIR)
+ 	cp android-headers.pc $(DESTDIR)/$(PKGCONFIGDIR)
+ 	sed -i -e s:prefix=/usr:prefix=$(PREFIX):g $(DESTDIR)/$(PKGCONFIGDIR)/android-headers.pc
+ 	cp -r hardware $(DESTDIR)/$(INCLUDEDIR)
+@@ -20,3 +21,6 @@ install:
+ 	cp -r libnfc-nxp $(DESTDIR)/$(INCLUDEDIR)
+ 	cp -r private $(DESTDIR)/$(INCLUDEDIR)
+ 	cp -r log $(DESTDIR)/$(INCLUDEDIR)
++
++clean:
++	if [ -f android-config-caf.h ]; then rm android-config-caf.h; fi
+--- /dev/null
++++ android-headers-7.1/genconf.sh
+@@ -0,0 +1,6 @@
++sed '/\/\* CONFIG GOES HERE/,$d' android-config.h > android-config-caf.h
++cat <<EOF >> android-config-caf.h
++#define QCOM_BSP 1
++#define QTI_BSP 1
++EOF
++sed '0,/\/\* CONFIG GOES HERE/d' android-config.h >> android-config-caf.h 
