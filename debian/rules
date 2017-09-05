@@ -4,3 +4,9 @@ export PREFIX:='/usr/'
 
 %:
 	dh $@
+
+override_dh_auto_configure:
+ifeq ($(filter caf,$(DEB_BUILD_PROFILES)),)
+	bash debian/genconf.sh
+endif
+	dh_auto_configure
