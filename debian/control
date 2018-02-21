@@ -1,6 +1,6 @@
 Source: android-headers
 Priority: optional
-Maintainer: Adam Boardman <adamboardman@gmail.com>
+Maintainer: TheKit <nekit1000@gmail.com>
 Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.8
 Section: libs
