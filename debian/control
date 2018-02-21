@@ -1,10 +1,11 @@
 Source: android-headers
 Priority: optional
-Maintainer: Rohan Garg <rohan@kde.org>
+Maintainer: Adam Boardman <adamboardman@gmail.com>
 Build-Depends: debhelper (>= 9)
-Standards-Version: 4.1.1
+Standards-Version: 3.9.8
 Section: libs
-Homepage: https://github.com/Halium/android-headers
+Homepage: https://github.com/gemian/android-headers
+Vcs-Git: https://github.com/gemian/android-headers.git
 
 Package: android-headers
 Architecture: all
