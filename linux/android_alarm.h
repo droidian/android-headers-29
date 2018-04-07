@@ -19,7 +19,7 @@
 #ifndef _UAPI_LINUX_ANDROID_ALARM_H
 #define _UAPI_LINUX_ANDROID_ALARM_H
 #include <linux/ioctl.h>
-#include <linux/time.h>
+#include <time.h>
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 enum android_alarm_type {
   ANDROID_ALARM_RTC_WAKEUP,
