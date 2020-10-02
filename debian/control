@@ -1,4 +1,4 @@
-Source: android-headers
+Source: android-headers-28
 Priority: optional
 Maintainer: TheKit <nekit1000@gmail.com>
 Build-Depends: debhelper (>= 9)
@@ -7,8 +7,9 @@ Section: libs
 Homepage: https://github.com/gemian/android-headers
 Vcs-Git: https://github.com/gemian/android-headers.git
 
-Package: android-headers
+Package: android-headers-28
 Architecture: all
+Provides: android-headers
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Android Platform Headers from AOSP releases
  Android NDK provided by Google contains subset of AOSP platform
