@@ -30,6 +30,12 @@
 #include <system/audio.h>
 #include <hardware/audio_effect.h>
 
+#ifdef __ARM_PCS_VFP
+#define FP_ATTRIB __attribute__((pcs("aapcs")))
+#else
+#define FP_ATTRIB
+#endif
+
 __BEGIN_DECLS
 
 /**
@@ -250,7 +256,7 @@ struct audio_stream_out {
      * This method might produce multiple PCM outputs or hardware accelerated
      * codecs, such as MP3 or AAC.
      */
-    int (*set_volume)(struct audio_stream_out *stream, float left, float right);
+    int (*set_volume)(struct audio_stream_out *stream, float left, float right) FP_ATTRIB;
 
     /**
      * Write audio buffer to driver. Returns number of bytes written, or a
@@ -434,7 +440,7 @@ struct audio_stream_in {
 
     /** set the input gain for the audio driver. This method is for
      *  for future use */
-    int (*set_gain)(struct audio_stream_in *stream, float gain);
+    int (*set_gain)(struct audio_stream_in *stream, float gain) FP_ATTRIB;
 
     /** Read audio buffer in from audio driver. Returns number of bytes read, or a
      *  negative status_t. If at least one frame was read prior to the error,
@@ -550,6 +556,36 @@ struct audio_stream_in {
                                   size_t *mic_count);
 
     /**
+     * Called by the framework to instruct the HAL to optimize the capture stream in the
+     * specified direction.
+     *
+     * \param[in] stream    the stream object.
+     * \param[in] direction The direction constant (from audio-base.h)
+     *   MIC_DIRECTION_UNSPECIFIED  Don't do any directionality processing of the
+     *      activated microphone(s).
+     *   MIC_DIRECTION_FRONT        Optimize capture for audio coming from the screen-side
+     *      of the device.
+     *   MIC_DIRECTION_BACK         Optimize capture for audio coming from the side of the
+     *      device opposite the screen.
+     *   MIC_DIRECTION_EXTERNAL     Optimize capture for audio coming from an off-device
+     *      microphone.
+     * \return OK if the call is successful, an error code otherwise.
+     */
+    int (*set_microphone_direction)(const struct audio_stream_in *stream,
+                                    audio_microphone_direction_t direction);
+
+    /**
+     * Called by the framework to specify to the HAL the desired zoom factor for the selected
+     * microphone(s).
+     *
+     * \param[in] stream    the stream object.
+     * \param[in] zoom      the zoom factor.
+     * \return OK if the call is successful, an error code otherwise.
+     */
+    int (*set_microphone_field_dimension)(const struct audio_stream_in *stream,
+                                          float zoom);
+
+    /**
      * Called when the metadata of the stream's sink has been changed.
      * @param sink_metadata Description of the audio that is recorded by the clients.
      */
@@ -649,14 +685,14 @@ struct audio_hw_device {
     int (*init_check)(const struct audio_hw_device *dev);
 
     /** set the audio volume of a voice call. Range is between 0.0 and 1.0 */
-    int (*set_voice_volume)(struct audio_hw_device *dev, float volume);
+    int (*set_voice_volume)(struct audio_hw_device *dev, float volume) FP_ATTRIB;
 
     /**
      * set the audio volume for all audio activities other than voice call.
      * Range between 0.0 and 1.0. If any value other than 0 is returned,
      * the software mixer will emulate this capability.
      */
-    int (*set_master_volume)(struct audio_hw_device *dev, float volume);
+    int (*set_master_volume)(struct audio_hw_device *dev, float volume) FP_ATTRIB;
 
     /**
      * Get the current master volume value for the HAL, if the HAL supports
@@ -665,7 +701,7 @@ struct audio_hw_device {
      * the initial master volume across all HALs.  HALs which do not support
      * this method may leave it set to NULL.
      */
-    int (*get_master_volume)(struct audio_hw_device *dev, float *volume);
+    int (*get_master_volume)(struct audio_hw_device *dev, float *volume) FP_ATTRIB;
 
     /**
      * set_mode is called when the audio mode changes. AUDIO_MODE_NORMAL mode
