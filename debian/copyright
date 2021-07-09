@@ -3,7 +3,7 @@ Upstream-Name: android-headers
 Source: https://github.com/Halium/android-headers
 
 Files: *
-Copyright: 2010 The Android Open Source Project
+Copyright: 2010-2021 The Android Open Source Project
 License: Apache License, Version 2.0
 
 Files: debian/*

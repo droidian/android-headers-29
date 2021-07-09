@@ -15,6 +15,7 @@ install:
 	cp -r hardware $(DESTDIR)/$(INCLUDEDIR)
 	cp -r hardware_legacy $(DESTDIR)/$(INCLUDEDIR)
 	cp -r linux $(DESTDIR)/$(INCLUDEDIR)
+	cp -r libnfc-nxp $(DESTDIR)/$(INCLUDEDIR)
 	cp -r log $(DESTDIR)/$(INCLUDEDIR)
 	cp -r nativebase $(DESTDIR)/$(INCLUDEDIR)
 	cp -r ndk $(DESTDIR)/$(INCLUDEDIR)
